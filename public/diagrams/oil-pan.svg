@@ -1,53 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" font-family="ui-sans-serif, system-ui, sans-serif">
-  <!-- Placeholder line-art diagram. Replace with a cleaned MegaZip / Higgsfield
-       image of the same 800x600 size, or re-map hotspots in src/data/parts.ts. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+  <!-- Original schematic redrawn for LancerParts. Layout and callout codes follow the
+       MegaZip CK2A 1500 "Cover, Rear Plate & Oil Pan" group. Hotspots: src/data/parts.ts -->
   <rect width="800" height="600" fill="#ffffff"/>
-  <g fill="none" stroke="#1f2937" stroke-width="2.5" stroke-linejoin="round">
-    <!-- 1. Oil strainer (pickup) -->
-    <ellipse cx="330" cy="135" rx="70" ry="18" fill="#f3f4f6"/>
-    <path d="M330 117 V80 Q330 62 350 62 H430" />
-    <rect x="428" y="54" width="14" height="16" rx="2" fill="#f3f4f6"/>
-    <path d="M275 135 h110 M290 128 h80 M290 142 h80" stroke-width="1.2" stroke="#6b7280"/>
+  <g fill="none" stroke="#1f2937" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Cylinder block (context only) -->
+    <path d="M150 110 L380 70 L450 100 L450 200 L220 245 L150 210 Z" fill="#f9fafb"/>
+    <path d="M150 110 L220 140 L450 100 M220 140 V245" />
+    <ellipse cx="262" cy="118" rx="24" ry="10"/><ellipse cx="312" cy="109" rx="24" ry="10"/>
+    <ellipse cx="362" cy="100" rx="24" ry="10"/><ellipse cx="408" cy="93" rx="20" ry="9"/>
 
-    <!-- 2. Oil pan gasket (flat frame) -->
-    <path d="M120 195 H680 L670 228 H130 Z" fill="#fef3c7"/>
-    <path d="M150 204 H650 L644 220 H156 Z" fill="#ffffff"/>
-    <g fill="#1f2937" stroke="none">
-      <circle cx="135" cy="211" r="3"/><circle cx="250" cy="200" r="3"/><circle cx="400" cy="200" r="3"/>
-      <circle cx="550" cy="200" r="3"/><circle cx="665" cy="211" r="3"/>
+    <!-- 02122 Rear plate -->
+    <path d="M520 50 L640 40 L665 90 L660 190 L560 205 L515 150 Z" fill="#e5e7eb"/>
+    <circle cx="590" cy="120" r="34" fill="#ffffff"/>
+    <g fill="#1f2937" stroke="none"><circle cx="535" cy="65" r="3"/><circle cx="635" cy="56" r="3"/><circle cx="648" cy="175" r="3"/><circle cx="560" cy="190" r="3"/></g>
+
+    <!-- 04161 Strainer gasket -->
+    <path d="M232 262 h44 l8 10 -8 10 h-44 l-8 -10 Z" fill="#fef3c7"/>
+    <circle cx="254" cy="272" r="6" fill="#ffffff"/>
+
+    <!-- 04124 Oil strainer -->
+    <ellipse cx="345" cy="298" rx="40" ry="13" fill="#f3f4f6"/>
+    <path d="M318 290 Q300 268 286 274" />
+    <path d="M320 298 h50 M326 304 h38" stroke-width="1" stroke="#6b7280"/>
+
+    <!-- Oil pan sealing flange (gasket surface) -->
+    <path d="M200 340 H580 L572 360 H208 Z" fill="#fef3c7"/>
+    <!-- 01500 Oil pan -->
+    <path d="M208 360 H572 L545 440 H400 L390 505 H260 L250 440 H232 Z" fill="#e5e7eb"/>
+    <path d="M275 455 H380 M275 478 H382" stroke-width="1" stroke="#9ca3af"/>
+    <g fill="#1f2937" stroke="none"><circle cx="225" cy="350" r="2.5"/><circle cx="320" cy="350" r="2.5"/><circle cx="415" cy="350" r="2.5"/><circle cx="510" cy="350" r="2.5"/><circle cx="560" cy="350" r="2.5"/></g>
+    <circle cx="258" cy="478" r="6" fill="#9ca3af"/>
+
+    <!-- 01597 Pan bolt -->
+    <path d="M600 398 h28 v14 h-28 Z" fill="#d1d5db"/><path d="M628 392 h12 v26 h-12 Z" fill="#9ca3af"/>
+    <path d="M580 405 H598" stroke-dasharray="5 4" stroke-width="1.4" stroke="#6b7280"/>
+
+    <!-- explode axis for drain parts -->
+    <path d="M250 478 H128" stroke-dasharray="5 4" stroke-width="1.4" stroke="#6b7280"/>
+    <!-- 01521 Drain plug gasket -->
+    <circle cx="190" cy="478" r="14" fill="#d1d5db"/><circle cx="190" cy="478" r="6" fill="#ffffff"/>
+    <!-- 01512 Drain plug -->
+    <path d="M100 466 h28 v24 h-28 Z" fill="#d1d5db"/>
+    <path d="M100 458 L80 458 L72 478 L80 498 L100 498 Z" fill="#9ca3af"/>
+  </g>
+
+  <!-- Callout tags -->
+  <g font-size="14" font-weight="700" text-anchor="middle">
+    <g stroke="#1d4ed8" stroke-width="1.5" fill="#ffffff">
+      <rect x="682" y="96" width="62" height="24" rx="5"/>
+      <rect x="150" y="260" width="62" height="24" rx="5"/>
+      <rect x="402" y="286" width="62" height="24" rx="5"/>
+      <rect x="610" y="338" width="78" height="24" rx="5"/>
+      <rect x="470" y="470" width="62" height="24" rx="5"/>
+      <rect x="664" y="393" width="62" height="24" rx="5"/>
+      <rect x="159" y="514" width="62" height="24" rx="5"/>
+      <rect x="55" y="514" width="62" height="24" rx="5"/>
     </g>
-
-    <!-- 3. Oil pan -->
-    <path d="M120 270 H680 L640 410 H520 V505 H280 V410 H160 Z" fill="#e5e7eb"/>
-    <path d="M120 270 H680" stroke-width="5"/>
-    <path d="M300 430 H500 M300 455 H500 M300 480 H500" stroke-width="1" stroke="#9ca3af"/>
-    <circle cx="520" cy="468" r="7" fill="#9ca3af"/>
-
-    <!-- explode axis -->
-    <path d="M527 468 H660" stroke-dasharray="6 5" stroke-width="1.5" stroke="#6b7280"/>
-
-    <!-- 4. Drain plug gasket -->
-    <circle cx="600" cy="468" r="15" fill="#d1d5db"/>
-    <circle cx="600" cy="468" r="7" fill="#ffffff"/>
-
-    <!-- 5. Drain plug -->
-    <path d="M660 455 H690 V481 H660 Z" fill="#d1d5db"/>
-    <path d="M690 448 L712 448 L720 468 L712 488 L690 488 Z" fill="#9ca3af"/>
-    <path d="M664 455 V481 M670 455 V481 M676 455 V481 M682 455 V481" stroke-width="1"/>
+    <g fill="#1d4ed8">
+      <text x="713" y="113">02122</text>
+      <text x="181" y="277">04161</text>
+      <text x="433" y="303">04124</text>
+      <text x="649" y="355">GASKET</text>
+      <text x="501" y="487">01500</text>
+      <text x="695" y="410">01597</text>
+      <text x="190" y="531">01521</text>
+      <text x="86" y="531">01512</text>
+    </g>
+  </g>
+  <g stroke="#1d4ed8" stroke-width="1.3">
+    <path d="M682 108 H662"/><path d="M212 272 H224"/><path d="M402 298 H386"/>
+    <path d="M610 350 H580"/><path d="M470 482 H400"/><path d="M664 405 H642"/>
+    <path d="M190 514 V494"/><path d="M86 514 V500"/>
   </g>
 
-  <!-- Callouts -->
-  <g font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">
-    <g><circle cx="470" cy="110" r="14" fill="#dc2626"/><text x="470" y="116">1</text></g>
-    <g><circle cx="720" cy="211" r="14" fill="#dc2626"/><text x="720" y="217">2</text></g>
-    <g><circle cx="720" cy="300" r="14" fill="#dc2626"/><text x="720" y="306">3</text></g>
-    <g><circle cx="600" cy="525" r="14" fill="#dc2626"/><text x="600" y="531">4</text></g>
-    <g><circle cx="740" cy="525" r="14" fill="#dc2626"/><text x="740" y="531">5</text></g>
-  </g>
-  <g stroke="#dc2626" stroke-width="1.5">
-    <path d="M456 110 H405"/><path d="M706 211 H680"/><path d="M706 300 H670"/>
-    <path d="M600 511 V484"/><path d="M730 515 L712 490"/>
-  </g>
-
-  <text x="24" y="580" font-size="13" fill="#6b7280">4G15 — Cover, Rear Plate &amp; Oil Pan (schematic placeholder)</text>
+  <text x="24" y="582" font-size="12" fill="#6b7280" font-family="ui-sans-serif, system-ui, sans-serif">4G15 · Cover, Rear Plate &amp; Oil Pan — schematic, not to scale</text>
 </svg>

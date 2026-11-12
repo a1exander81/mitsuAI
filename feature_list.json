@@ -7,7 +7,7 @@
       "name": "Interactive Oil Pan Diagram",
       "batch": 2,
       "status": "not_started",
-      "acceptance": "Tapping the oil pan gasket hotspot (or its list row) opens a sheet showing MD030133, description, image placeholder, and working Shopee + Lazada search links. Works on a 375px-wide phone."
+      "acceptance": "Tapping a hotspot (or its list row) opens a sheet for that part, e.g. the oil pan gasket shows MD030133, description, image placeholder, and working Shopee + Lazada search links. Works on a 375px-wide phone."
     },
     {
       "id": "feat-002",

@@ -44,7 +44,7 @@ function PartDetail({ part, sort }: { part: Part; sort: SortKey }) {
     <div className="flex flex-col gap-4 overflow-y-auto px-4 pb-6">
       <SheetHeader className="px-0">
         <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="secondary">#{part.callout}</Badge>
+          <Badge variant="secondary" className="font-mono">{part.callout}</Badge>
           <span className="font-mono text-lg font-semibold tracking-wide">
             {part.oemNumber ?? "OEM # TBD"}
           </span>

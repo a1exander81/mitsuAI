@@ -17,8 +17,8 @@ export interface Part {
   description: string;
   category: "oil-pan" | "steering" | "suspension";
   diagramId: string;
-  /** Callout number printed on the diagram. */
-  callout: number;
+  /** Callout code printed on the diagram (MegaZip PNC, e.g. "01500"). */
+  callout: string;
   hotspot: Hotspot;
   imageUrl: string | null;
   notes?: string;

@@ -25,7 +25,7 @@ export function PartsList({ parts, selectedId, onSelect }: Props) {
               p.id === selectedId && "bg-muted",
             )}
           >
-            <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
+            <span className="flex h-7 w-16 shrink-0 items-center justify-center rounded-md border border-blue-700 font-mono text-[11px] font-bold text-blue-700">
               {p.callout}
             </span>
             <span className="min-w-0 flex-1">

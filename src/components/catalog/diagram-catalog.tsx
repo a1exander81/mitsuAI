@@ -28,7 +28,7 @@ export function DiagramCatalog({ diagram, parts }: Props) {
           selectedId={selected?.id ?? null}
           onSelect={setSelected}
         />
-        <p className="mt-2 text-xs text-muted-foreground">Tap a numbered part to see details and buy links.</p>
+        <p className="mt-2 text-xs text-muted-foreground">Tap a labelled part to see details and buy links.</p>
       </section>
 
       <section aria-label="Parts" className="flex flex-col gap-3">

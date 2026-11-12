@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const DIAGRAMS = [
-  { href: "/diagrams/oil-pan", title: "Oil Pan", desc: "Gasket, drain plug, strainer", ready: true },
+  { href: "/diagrams/oil-pan", title: "Cover, Rear Plate & Oil Pan", desc: "Oil pan, drain plug, strainer, rear plate", ready: true },
   { href: "#", title: "Power Steering Oil Line", desc: "Pressure & return hoses", ready: false },
 ];
 
