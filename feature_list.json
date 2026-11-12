@@ -1,0 +1,27 @@
+{
+  "project": "LancerParts",
+  "statuses": ["not_started", "active", "passing"],
+  "features": [
+    {
+      "id": "feat-001",
+      "name": "Interactive Oil Pan Diagram",
+      "batch": 2,
+      "status": "not_started",
+      "acceptance": "Tapping the oil pan gasket hotspot (or its list row) opens a sheet showing MD030133, description, image placeholder, and working Shopee + Lazada search links. Works on a 375px-wide phone."
+    },
+    {
+      "id": "feat-002",
+      "name": "Price & Newest Sort",
+      "batch": 3,
+      "status": "not_started",
+      "acceptance": "User can sort parts by price (low → high) or newest; the choice also applies to generated Shopee/FB Marketplace links (and Lazada price sort)."
+    },
+    {
+      "id": "feat-003",
+      "name": "Preferred Location Selector",
+      "batch": 4,
+      "status": "not_started",
+      "acceptance": "On first visit the user picks a preferred area (Quezon City / NCR, Region 1, Baguio, ...) or uses browser geolocation; the choice persists and is shown in the header."
+    }
+  ]
+}

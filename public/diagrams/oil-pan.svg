@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" font-family="ui-sans-serif, system-ui, sans-serif">
+  <!-- Placeholder line-art diagram. Replace with a cleaned MegaZip / Higgsfield
+       image of the same 800x600 size, or re-map hotspots in src/data/parts.ts. -->
+  <rect width="800" height="600" fill="#ffffff"/>
+  <g fill="none" stroke="#1f2937" stroke-width="2.5" stroke-linejoin="round">
+    <!-- 1. Oil strainer (pickup) -->
+    <ellipse cx="330" cy="135" rx="70" ry="18" fill="#f3f4f6"/>
+    <path d="M330 117 V80 Q330 62 350 62 H430" />
+    <rect x="428" y="54" width="14" height="16" rx="2" fill="#f3f4f6"/>
+    <path d="M275 135 h110 M290 128 h80 M290 142 h80" stroke-width="1.2" stroke="#6b7280"/>
+
+    <!-- 2. Oil pan gasket (flat frame) -->
+    <path d="M120 195 H680 L670 228 H130 Z" fill="#fef3c7"/>
+    <path d="M150 204 H650 L644 220 H156 Z" fill="#ffffff"/>
+    <g fill="#1f2937" stroke="none">
+      <circle cx="135" cy="211" r="3"/><circle cx="250" cy="200" r="3"/><circle cx="400" cy="200" r="3"/>
+      <circle cx="550" cy="200" r="3"/><circle cx="665" cy="211" r="3"/>
+    </g>
+
+    <!-- 3. Oil pan -->
+    <path d="M120 270 H680 L640 410 H520 V505 H280 V410 H160 Z" fill="#e5e7eb"/>
+    <path d="M120 270 H680" stroke-width="5"/>
+    <path d="M300 430 H500 M300 455 H500 M300 480 H500" stroke-width="1" stroke="#9ca3af"/>
+    <circle cx="520" cy="468" r="7" fill="#9ca3af"/>
+
+    <!-- explode axis -->
+    <path d="M527 468 H660" stroke-dasharray="6 5" stroke-width="1.5" stroke="#6b7280"/>
+
+    <!-- 4. Drain plug gasket -->
+    <circle cx="600" cy="468" r="15" fill="#d1d5db"/>
+    <circle cx="600" cy="468" r="7" fill="#ffffff"/>
+
+    <!-- 5. Drain plug -->
+    <path d="M660 455 H690 V481 H660 Z" fill="#d1d5db"/>
+    <path d="M690 448 L712 448 L720 468 L712 488 L690 488 Z" fill="#9ca3af"/>
+    <path d="M664 455 V481 M670 455 V481 M676 455 V481 M682 455 V481" stroke-width="1"/>
+  </g>
+
+  <!-- Callouts -->
+  <g font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">
+    <g><circle cx="470" cy="110" r="14" fill="#dc2626"/><text x="470" y="116">1</text></g>
+    <g><circle cx="720" cy="211" r="14" fill="#dc2626"/><text x="720" y="217">2</text></g>
+    <g><circle cx="720" cy="300" r="14" fill="#dc2626"/><text x="720" y="306">3</text></g>
+    <g><circle cx="600" cy="525" r="14" fill="#dc2626"/><text x="600" y="531">4</text></g>
+    <g><circle cx="740" cy="525" r="14" fill="#dc2626"/><text x="740" y="531">5</text></g>
+  </g>
+  <g stroke="#dc2626" stroke-width="1.5">
+    <path d="M456 110 H405"/><path d="M706 211 H680"/><path d="M706 300 H670"/>
+    <path d="M600 511 V484"/><path d="M730 515 L712 490"/>
+  </g>
+
+  <text x="24" y="580" font-size="13" fill="#6b7280">4G15 — Cover, Rear Plate &amp; Oil Pan (schematic placeholder)</text>
+</svg>
