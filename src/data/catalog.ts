@@ -223,6 +223,10 @@ const SEEDED: Record<string, Pick<CatalogDiagram, "partsDiagramId" | "href" | "m
   "rocker-cover": { partsDiagramId: "rocker-cover" },
   "cylinder-head": { partsDiagramId: "cylinder-head" },
   "cylinder-block": { partsDiagramId: "cylinder-block" },
+  "piston-crankshaft": { partsDiagramId: "piston-crankshaft" },
+  "camshaft-valve": { partsDiagramId: "camshaft-valve" },
+  "oil-press-switch-or-gauge-unit": { partsDiagramId: "oil-press-switch-or-gauge-unit" },
+  "engine-mounting-support": { partsDiagramId: "engine-mounting-support" },
   "cover-rear-plate-oil-pan": {
     partsDiagramId: "oil-pan",
     href: "/diagrams/oil-pan",
