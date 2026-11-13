@@ -98,12 +98,13 @@ function PartDetail({ part, sort }: { part: Part; sort: SortKey }) {
           </Button>
         ))}
         <p className="text-xs text-muted-foreground">
-          Searches for “{searchQuery(part.name, part.category)}”.
+          Shopee, Lazada and FB Marketplace search for “{searchQuery(part.name, part.category)}”.
+          {part.oemNumber && ` eBay searches the part number ${part.oemNumber}.`}
         </p>
         {part.oemNumber && (
           <p className="text-sm">
             <span className="text-muted-foreground">Or search the exact part number {part.oemNumber}: </span>
-            {links.map((l, i) => (
+            {links.filter((l) => !l.source.startsWith("ebay")).map((l, i) => (
               <span key={l.source}>
                 {i > 0 && " · "}
                 <a href={l.oemUrl ?? l.url} target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-2">

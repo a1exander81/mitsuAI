@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { MEGAZIP_INDEX_URL, TOTAL_DIAGRAMS, type CatalogCategory, type CatalogDiagram } from "@/data/catalog";
 import { diagramColor, MODELS } from "@/data/models";
 import { DIAGRAMS, partsForDiagram } from "@/data/parts";
-import { facebookUrl, lazadaUrl, searchQuery, shopeeUrl } from "@/lib/buy-links";
+import { ebayUrl, facebookUrl, lazadaUrl, searchQuery, shopeeUrl } from "@/lib/buy-links";
 import type { Part } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { InteractiveDiagram } from "./interactive-diagram";
@@ -145,6 +145,8 @@ function DiagramDetail({ diagram, categoryName }: { diagram: CatalogDiagram; cat
     { label: "Shopee", url: shopeeUrl(query) },
     { label: "Lazada", url: lazadaUrl(query) },
     { label: "FB Marketplace", url: facebookUrl(query) },
+    { label: "eBay Philippines", url: ebayUrl(query, "ph") },
+    { label: "eBay US", url: ebayUrl(query, "us") },
   ];
 
   return (
