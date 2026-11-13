@@ -12,7 +12,7 @@ import {
   type CatalogCategory,
   type CatalogDiagram,
 } from "@/data/catalog";
-import { diagramColor, MODELS } from "@/data/models";
+import { diagramColor } from "@/data/models";
 import { DIAGRAMS, partsForDiagram } from "@/data/parts";
 import {
   ebayUrl,
@@ -57,29 +57,22 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
     [illustration],
   );
 
-  // Views for the selected diagram: the black-and-white illustration, the category's 3D model
-  // (with this diagram highlighted), then any generated or scripted 3D part models.
+  // Views for the selected diagram: the black-and-white illustration, then its 3D part
+  // model(s). The old whole-category block model is no longer shown.
   const partModels = selected?.models ?? [];
   const views = [
     ...(illustration
       ? [{ key: "illustration", label: "Illustration", model: null }]
       : []),
-    // "3D" shows the diagram's own part model when it has one, otherwise the category model.
-    { key: "3d", label: "3D", model: partModels[0] ?? null },
-    ...partModels
-      .slice(1)
-      .map((m) => ({
-        key: `3d-${m.label}`,
-        label: `3D · ${m.label}`,
-        model: m,
-      })),
-    ...(partModels.length
-      ? [{ key: "3d-category", label: "3D · Whole category", model: null }]
-      : []),
+    ...partModels.map((m, i) => ({
+      key: i === 0 ? "3d" : `3d-${m.label}`,
+      label: i === 0 ? "3D" : `3D · ${m.label}`,
+      model: m,
+    })),
   ];
-  const view = views.find((v) => v.key === viewKey) ?? views[0];
-  const model = view.model;
-  const showIllustration = view.key === "illustration";
+  const view = views.find((v) => v.key === viewKey) ?? views[0] ?? null;
+  const model = view?.model ?? null;
+  const showIllustration = view?.key === "illustration";
 
   const select = (index: number | null) => {
     setSelectedIndex(index);
@@ -88,7 +81,7 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
-      <section aria-label="3D model">
+      <section aria-label="Diagram view">
         {showIllustration && illustration ? (
           <InteractiveDiagram
             diagram={illustration}
@@ -96,15 +89,24 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
             selectedId={part?.id ?? null}
             onSelect={setPart}
           />
-        ) : (
+        ) : model ? (
           <CategoryViewer3D
-            pieces={MODELS[category.id] ?? []}
+            pieces={[]}
             diagrams={category.diagrams}
             selectedIndex={selectedIndex}
             onSelect={select}
-            modelUrl={model?.url ?? null}
-            ownMaterials={model?.ownMaterials}
+            modelUrl={model.url}
+            ownMaterials={model.ownMaterials}
           />
+        ) : (
+          <div className="flex aspect-[4/3] w-full flex-col items-center justify-center gap-1 rounded-xl border border-dashed bg-muted/40 p-6 text-center text-sm text-muted-foreground">
+            <span className="font-medium text-foreground">
+              {selected ? selected.name : category.name}
+            </span>
+            {selected
+              ? "Illustration and 3D model coming soon. The diagram's data and buy links are on the right."
+              : "Pick a diagram from the list to see its parts."}
+          </div>
         )}
         {views.length > 1 && (
           <div
@@ -129,8 +131,8 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
           {showIllustration && illustration
             ? "Tap a numbered part to see its OEM number and buy links. Illustration shows typical part shapes."
             : model
-              ? `${model.note} Deselect the diagram to return to the category view.`
-              : "Drag to rotate, pinch or scroll to zoom, tap a part to select it. Simplified illustration — not to scale."}
+              ? `Drag to rotate, pinch or scroll to zoom. ${model.note}`
+              : null}
         </p>
       </section>
 
@@ -139,7 +141,7 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
           <DiagramDetail diagram={selected} categoryName={category.name} />
         ) : (
           <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
-            Select a part of the model or a diagram below to see its data.
+            Select a diagram below to see its parts and buy links.
           </p>
         )}
 
