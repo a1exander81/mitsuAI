@@ -3,14 +3,38 @@ import type { Part, SortKey } from "./types";
 export interface BuyLink {
   source: "shopee" | "lazada" | "facebook";
   label: string;
+  /** Search by part name plus engine or car model — matches how sellers title listings. */
   url: string;
+  /** Exact search by OEM number, when one is known. Fewer results, but precise. */
+  oemUrl: string | null;
 }
 
-const VEHICLE = "Mitsubishi Lancer 4G15";
+/** Added to engine-part searches: sellers list these by engine code. */
+export const ENGINE_MODEL = "Mitsubishi 4G15";
+/** Added to body/chassis-part searches. "Pizza" is the PH nickname for the 1997–2002 Lancer. */
+export const CAR_MODEL = "Mitsubishi Lancer Pizza";
 
-/** OEM number when known (most precise), otherwise a descriptive search. */
-export function searchQuery(part: Pick<Part, "oemNumber" | "name">): string {
-  return part.oemNumber ?? `${VEHICLE} ${part.name}`;
+/** Catalog categories (and part categories) whose parts are engine-specific rather than car-specific. */
+const ENGINE_CATEGORIES = new Set([
+  "engine",
+  "lubrication",
+  "fuel",
+  "cooling",
+  "intake-exhaust",
+  "engine-electrical",
+  "clutch",
+  "manual-transmission",
+  "oil-pan",
+]);
+
+export const modelFor = (category: string) => (ENGINE_CATEGORIES.has(category) ? ENGINE_MODEL : CAR_MODEL);
+
+/** "Oil strainer (pickup)" → "Oil strainer pickup"; "Cover, Rear Plate & Oil Pan" → "Cover Rear Plate Oil Pan". */
+const plainName = (name: string) => name.replace(/[(),&/]/g, " ").replace(/\s+/g, " ").trim();
+
+/** Descriptive search: engine or car model + part name, e.g. "Mitsubishi 4G15 Oil pan". */
+export function searchQuery(name: string, category: string): string {
+  return `${modelFor(category)} ${plainName(name)}`;
 }
 
 export function shopeeUrl(query: string, sort?: SortKey): string {
@@ -39,10 +63,11 @@ export function facebookUrl(query: string, sort?: SortKey): string {
 }
 
 export function buildBuyLinks(part: Part, sort?: SortKey): BuyLink[] {
-  const q = searchQuery(part);
+  const q = searchQuery(part.name, part.category);
+  const oem = part.oemNumber;
   return [
-    { source: "shopee", label: "Shopee", url: shopeeUrl(q, sort) },
-    { source: "lazada", label: "Lazada", url: lazadaUrl(q, sort) },
-    { source: "facebook", label: "FB Marketplace", url: facebookUrl(q, sort) },
+    { source: "shopee", label: "Shopee", url: shopeeUrl(q, sort), oemUrl: oem && shopeeUrl(oem, sort) },
+    { source: "lazada", label: "Lazada", url: lazadaUrl(q, sort), oemUrl: oem && lazadaUrl(oem, sort) },
+    { source: "facebook", label: "FB Marketplace", url: facebookUrl(q, sort), oemUrl: oem && facebookUrl(oem, sort) },
   ];
 }

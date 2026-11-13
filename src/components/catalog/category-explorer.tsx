@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { MEGAZIP_INDEX_URL, TOTAL_DIAGRAMS, type CatalogCategory, type CatalogDiagram } from "@/data/catalog";
 import { diagramColor, MODELS } from "@/data/models";
 import { DIAGRAMS, partsForDiagram } from "@/data/parts";
-import { facebookUrl, lazadaUrl, shopeeUrl } from "@/lib/buy-links";
+import { facebookUrl, lazadaUrl, searchQuery, shopeeUrl } from "@/lib/buy-links";
 import type { Part } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { InteractiveDiagram } from "./interactive-diagram";
@@ -140,7 +140,7 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
 
 function DiagramDetail({ diagram, categoryName }: { diagram: CatalogDiagram; categoryName: string }) {
   const parts = diagram.partsDiagramId ? partsForDiagram(diagram.partsDiagramId) : [];
-  const query = `Mitsubishi Lancer 4G15 ${diagram.name.replace(/[,&/]/g, " ").replace(/\s+/g, " ")}`;
+  const query = searchQuery(diagram.name, diagram.categoryId);
   const links = [
     { label: "Shopee", url: shopeeUrl(query) },
     { label: "Lazada", url: lazadaUrl(query) },
@@ -194,6 +194,7 @@ function DiagramDetail({ diagram, categoryName }: { diagram: CatalogDiagram; cat
 
       <div className="flex flex-col gap-2">
         <h4 className="text-sm font-semibold">Search for these parts</h4>
+        <p className="text-xs text-muted-foreground">Searches for “{query}”.</p>
         {links.map((l) => (
           <Button key={l.label} asChild variant="outline" className="h-11 justify-between">
             <a href={l.url} target="_blank" rel="noopener noreferrer">
