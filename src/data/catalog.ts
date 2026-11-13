@@ -68,12 +68,31 @@ const RAW: [category: string, diagrams: RawDiagram[]][] = [
   ["Lubrication", ["Oil Pump & Oil Filter"]],
   [
     "Fuel",
-    ["Fuel Tank", "Fuel Line & Vapor Gas Control", "Fuel Pump", ["Carburetor", "All (Assembly)"], "Engine Control"],
+    [
+      "Fuel Tank",
+      "Fuel Line & Vapor Gas Control",
+      "Fuel Pump",
+      ["Carburetor", "All (Assembly)"],
+      "Engine Control",
+    ],
   ],
-  ["Cooling", [["Radiator, Hose & Condenser Tank", "M/T"], "Water Pump", "Water Pipe & Thermostat"]],
+  [
+    "Cooling",
+    [
+      ["Radiator, Hose & Condenser Tank", "M/T"],
+      "Water Pump",
+      "Water Pipe & Thermostat",
+    ],
+  ],
   [
     "Intake & Exhaust",
-    ["Air Cleaner", "Inlet Manifold", "Exhaust Manifold", "Exhaust Pipe & Muffler", ["Emission Control", "M/T"]],
+    [
+      "Air Cleaner",
+      "Inlet Manifold",
+      "Exhaust Manifold",
+      "Exhaust Pipe & Muffler",
+      ["Emission Control", "M/T"],
+    ],
   ],
   [
     "Engine Electrical",
@@ -99,7 +118,10 @@ const RAW: [category: string, diagrams: RawDiagram[]][] = [
   ["Front Axle", [["Front Axle Drive Shaft", "Rh"], "Front Axle Hub & Drum"]],
   ["Rear Axle", ["Rear Axle Hub & Drum"]],
   ["Wheel & Tire", [["Wheel, Tire & Cover", "Tire, Wheel Cover Etc."]]],
-  ["Front Suspension", ["Front Susp Arm & Member", ["Front Susp Strut & Spring", "-9706.1"]]],
+  [
+    "Front Suspension",
+    ["Front Susp Arm & Member", ["Front Susp Strut & Spring", "-9706.1"]],
+  ],
   ["Rear Suspension", [["Rear Susp", "Suspension Arm Etc."]]],
   [
     "Brake",
@@ -219,22 +241,51 @@ const RAW: [category: string, diagrams: RawDiagram[]][] = [
 ];
 
 /** Diagrams that already have seeded parts and/or a hotspot page. */
-const SEEDED: Record<string, Pick<CatalogDiagram, "partsDiagramId" | "href" | "models">> = {
+const SEEDED: Record<
+  string,
+  Pick<CatalogDiagram, "partsDiagramId" | "href" | "models">
+> = {
   "rocker-cover": { partsDiagramId: "rocker-cover" },
-  "cylinder-head": { partsDiagramId: "cylinder-head" },
+  "cylinder-head": {
+    partsDiagramId: "cylinder-head",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/cylinder-head.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   "cylinder-block": { partsDiagramId: "cylinder-block" },
   "piston-crankshaft": { partsDiagramId: "piston-crankshaft" },
   "camshaft-valve": { partsDiagramId: "camshaft-valve" },
-  "oil-press-switch-or-gauge-unit": { partsDiagramId: "oil-press-switch-or-gauge-unit" },
+  "oil-press-switch-or-gauge-unit": {
+    partsDiagramId: "oil-press-switch-or-gauge-unit",
+  },
   "engine-mounting-support": { partsDiagramId: "engine-mounting-support" },
   "engine-assy": { partsDiagramId: "engine-assy" },
   "short-engine-assy": { partsDiagramId: "short-engine-assy" },
-  "engine-overhaul-gasket-kit": { partsDiagramId: "engine-overhaul-gasket-kit" },
+  "engine-overhaul-gasket-kit": {
+    partsDiagramId: "engine-overhaul-gasket-kit",
+  },
   "liquid-gasket": { partsDiagramId: "liquid-gasket" },
   "fuel-tank": { partsDiagramId: "fuel-tank" },
-  "fuel-line-vapor-gas-control": { partsDiagramId: "fuel-line-vapor-gas-control" },
+  "fuel-line-vapor-gas-control": {
+    partsDiagramId: "fuel-line-vapor-gas-control",
+  },
   "fuel-pump": { partsDiagramId: "fuel-pump" },
-  "carburetor": { partsDiagramId: "carburetor" },
+  carburetor: {
+    partsDiagramId: "carburetor",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/carburetor.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   "engine-control": { partsDiagramId: "engine-control" },
   "air-cleaner": { partsDiagramId: "air-cleaner" },
   "inlet-manifold": { partsDiagramId: "inlet-manifold" },
@@ -242,8 +293,20 @@ const SEEDED: Record<string, Pick<CatalogDiagram, "partsDiagramId" | "href" | "m
   "exhaust-pipe-muffler": { partsDiagramId: "exhaust-pipe-muffler" },
   "emission-control": { partsDiagramId: "emission-control" },
   "oil-pump-oil-filter": { partsDiagramId: "oil-pump-oil-filter" },
-  "radiator-hose-condenser-tank": { partsDiagramId: "radiator-hose-condenser-tank" },
-  "water-pump": { partsDiagramId: "water-pump" },
+  "radiator-hose-condenser-tank": {
+    partsDiagramId: "radiator-hose-condenser-tank",
+  },
+  "water-pump": {
+    partsDiagramId: "water-pump",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/water-pump.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   "water-pipe-thermostat": { partsDiagramId: "water-pipe-thermostat" },
   "cover-rear-plate-oil-pan": {
     partsDiagramId: "oil-pan",
@@ -291,7 +354,15 @@ export const CATEGORIES: CatalogCategory[] = RAW.map(([name, diagrams]) => {
     diagrams: diagrams.map((raw, indexInCategory) => {
       const [dName, variant] = typeof raw === "string" ? [raw, null] : raw;
       const id = slug(dName);
-      return { id, number: ++counter, name: dName, variant, categoryId, indexInCategory, ...SEEDED[id] };
+      return {
+        id,
+        number: ++counter,
+        name: dName,
+        variant,
+        categoryId,
+        indexInCategory,
+        ...SEEDED[id],
+      };
     }),
   };
 });

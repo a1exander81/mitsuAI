@@ -6,10 +6,21 @@ import { ExternalLink } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MEGAZIP_INDEX_URL, TOTAL_DIAGRAMS, type CatalogCategory, type CatalogDiagram } from "@/data/catalog";
+import {
+  MEGAZIP_INDEX_URL,
+  TOTAL_DIAGRAMS,
+  type CatalogCategory,
+  type CatalogDiagram,
+} from "@/data/catalog";
 import { diagramColor, MODELS } from "@/data/models";
 import { DIAGRAMS, partsForDiagram } from "@/data/parts";
-import { ebayUrl, facebookUrl, lazadaUrl, searchQuery, shopeeUrl } from "@/lib/buy-links";
+import {
+  ebayUrl,
+  facebookUrl,
+  lazadaUrl,
+  searchQuery,
+  shopeeUrl,
+} from "@/lib/buy-links";
 import type { Part } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { InteractiveDiagram } from "./interactive-diagram";
@@ -28,22 +39,43 @@ const CategoryViewer3D = dynamic(() => import("./category-viewer-3d"), {
 export function CategoryExplorer({ category }: { category: CatalogCategory }) {
   // Open on the first diagram that has an illustration, so the page starts with something recognisable.
   const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
-    const first = category.diagrams.find((d) => d.partsDiagramId && DIAGRAMS[d.partsDiagramId]);
+    const first = category.diagrams.find(
+      (d) => d.partsDiagramId && DIAGRAMS[d.partsDiagramId],
+    );
     return first ? first.indexInCategory : null;
   });
   // Which view to show; kept when switching diagrams so a 3D user stays in 3D.
   const [viewKey, setViewKey] = useState("illustration");
   const [part, setPart] = useState<Part | null>(null);
-  const selected = selectedIndex !== null ? category.diagrams[selectedIndex] : null;
-  const illustration = selected?.partsDiagramId ? DIAGRAMS[selected.partsDiagramId] : undefined;
-  const illustrationParts = useMemo(() => (illustration ? partsForDiagram(illustration.id) : []), [illustration]);
+  const selected =
+    selectedIndex !== null ? category.diagrams[selectedIndex] : null;
+  const illustration = selected?.partsDiagramId
+    ? DIAGRAMS[selected.partsDiagramId]
+    : undefined;
+  const illustrationParts = useMemo(
+    () => (illustration ? partsForDiagram(illustration.id) : []),
+    [illustration],
+  );
 
   // Views for the selected diagram: the black-and-white illustration, the category's 3D model
   // (with this diagram highlighted), then any generated or scripted 3D part models.
+  const partModels = selected?.models ?? [];
   const views = [
-    ...(illustration ? [{ key: "illustration", label: "Illustration", model: null }] : []),
-    { key: "3d", label: "3D", model: null },
-    ...(selected?.models ?? []).map((m) => ({ key: `3d-${m.label}`, label: `3D · ${m.label}`, model: m })),
+    ...(illustration
+      ? [{ key: "illustration", label: "Illustration", model: null }]
+      : []),
+    // "3D" shows the diagram's own part model when it has one, otherwise the category model.
+    { key: "3d", label: "3D", model: partModels[0] ?? null },
+    ...partModels
+      .slice(1)
+      .map((m) => ({
+        key: `3d-${m.label}`,
+        label: `3D · ${m.label}`,
+        model: m,
+      })),
+    ...(partModels.length
+      ? [{ key: "3d-category", label: "3D · Whole category", model: null }]
+      : []),
   ];
   const view = views.find((v) => v.key === viewKey) ?? views[0];
   const model = view.model;
@@ -75,7 +107,11 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
           />
         )}
         {views.length > 1 && (
-          <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label="View">
+          <div
+            className="mt-2 flex flex-wrap gap-2"
+            role="group"
+            aria-label="View"
+          >
             {views.map((v) => (
               <Button
                 key={v.key}
@@ -93,8 +129,8 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
           {showIllustration && illustration
             ? "Tap a numbered part to see its OEM number and buy links. Illustration shows typical part shapes."
             : model
-            ? `${model.note} Deselect the diagram to return to the category view.`
-            : "Drag to rotate, pinch or scroll to zoom, tap a part to select it. Simplified illustration — not to scale."}
+              ? `${model.note} Deselect the diagram to return to the category view.`
+              : "Drag to rotate, pinch or scroll to zoom, tap a part to select it. Simplified illustration — not to scale."}
         </p>
       </section>
 
@@ -108,17 +144,26 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
         )}
 
         <div>
-          <h2 className="mb-2 font-semibold">Diagrams ({category.diagrams.length})</h2>
+          <h2 className="mb-2 font-semibold">
+            Diagrams ({category.diagrams.length})
+          </h2>
           <ul className="flex flex-col gap-1.5">
             {category.diagrams.map((d) => (
               <li key={d.id}>
                 <button
                   type="button"
                   aria-pressed={d.indexInCategory === selectedIndex}
-                  onClick={() => select(d.indexInCategory === selectedIndex ? null : d.indexInCategory)}
+                  onClick={() =>
+                    select(
+                      d.indexInCategory === selectedIndex
+                        ? null
+                        : d.indexInCategory,
+                    )
+                  }
                   className={cn(
                     "flex min-h-11 w-full items-center gap-3 rounded-lg border px-3 py-2 text-left text-sm transition-colors hover:bg-muted",
-                    d.indexInCategory === selectedIndex && "border-foreground bg-muted",
+                    d.indexInCategory === selectedIndex &&
+                      "border-foreground bg-muted",
                   )}
                 >
                   <span
@@ -135,13 +180,25 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
           </ul>
         </div>
       </section>
-      <PartDetailSheet part={part} sort="price-asc" onOpenChange={(open) => !open && setPart(null)} />
+      <PartDetailSheet
+        part={part}
+        sort="price-asc"
+        onOpenChange={(open) => !open && setPart(null)}
+      />
     </div>
   );
 }
 
-function DiagramDetail({ diagram, categoryName }: { diagram: CatalogDiagram; categoryName: string }) {
-  const parts = diagram.partsDiagramId ? partsForDiagram(diagram.partsDiagramId) : [];
+function DiagramDetail({
+  diagram,
+  categoryName,
+}: {
+  diagram: CatalogDiagram;
+  categoryName: string;
+}) {
+  const parts = diagram.partsDiagramId
+    ? partsForDiagram(diagram.partsDiagramId)
+    : [];
   const query = searchQuery(diagram.name, diagram.categoryId);
   const links = [
     { label: "Shopee", url: shopeeUrl(query) },
@@ -152,7 +209,10 @@ function DiagramDetail({ diagram, categoryName }: { diagram: CatalogDiagram; cat
   ];
 
   return (
-    <div className="flex flex-col gap-4 rounded-xl border p-4" aria-live="polite">
+    <div
+      className="flex flex-col gap-4 rounded-xl border p-4"
+      aria-live="polite"
+    >
       <div>
         <h3 className="text-lg font-semibold">{diagram.name}</h3>
         <dl className="mt-2 grid grid-cols-2 gap-3 text-sm">
@@ -178,15 +238,21 @@ function DiagramDetail({ diagram, categoryName }: { diagram: CatalogDiagram; cat
         {parts.length > 0 ? (
           <ul className="divide-y rounded-lg border text-sm">
             {parts.map((p) => (
-              <li key={p.id} className="flex items-center justify-between gap-3 px-3 py-2">
+              <li
+                key={p.id}
+                className="flex items-center justify-between gap-3 px-3 py-2"
+              >
                 <span className="min-w-0">{p.name}</span>
-                <span className="shrink-0 font-mono">{p.oemNumber ?? "TBD"}</span>
+                <span className="shrink-0 font-mono">
+                  {p.oemNumber ?? "TBD"}
+                </span>
               </li>
             ))}
           </ul>
         ) : (
           <p className="text-sm text-muted-foreground">
-            OEM numbers for this diagram haven&apos;t been added yet. Open it on MegaZip for the full parts list.
+            OEM numbers for this diagram haven&apos;t been added yet. Open it on
+            MegaZip for the full parts list.
           </p>
         )}
         {diagram.href && (
@@ -200,7 +266,12 @@ function DiagramDetail({ diagram, categoryName }: { diagram: CatalogDiagram; cat
         <h4 className="text-sm font-semibold">Search for these parts</h4>
         <p className="text-xs text-muted-foreground">Searches for “{query}”.</p>
         {links.map((l) => (
-          <Button key={l.label} asChild variant="outline" className="h-11 justify-between">
+          <Button
+            key={l.label}
+            asChild
+            variant="outline"
+            className="h-11 justify-between"
+          >
             <a href={l.url} target="_blank" rel="noopener noreferrer">
               {l.label}
               <ExternalLink className="size-4" />
@@ -213,7 +284,8 @@ function DiagramDetail({ diagram, categoryName }: { diagram: CatalogDiagram; cat
           rel="noopener noreferrer"
           className="text-xs text-muted-foreground underline underline-offset-2"
         >
-          Source: MegaZip CK2A 1500 catalog — find “{diagram.name}” under {categoryName}
+          Source: MegaZip CK2A 1500 catalog — find “{diagram.name}” under{" "}
+          {categoryName}
         </a>
       </div>
     </div>
