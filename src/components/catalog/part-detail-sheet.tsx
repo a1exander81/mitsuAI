@@ -11,7 +11,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { buildBuyLinks } from "@/lib/buy-links";
+import { buildBuyLinks, searchQuery } from "@/lib/buy-links";
 import { formatPhp } from "@/lib/sort";
 import type { Part, SortKey } from "@/lib/types";
 
@@ -97,6 +97,23 @@ function PartDetail({ part, sort }: { part: Part; sort: SortKey }) {
             </a>
           </Button>
         ))}
+        <p className="text-xs text-muted-foreground">
+          Shopee, Lazada and FB Marketplace search for “{searchQuery(part.name, part.category)}”.
+          {part.oemNumber && ` eBay searches the part number ${part.oemNumber}.`}
+        </p>
+        {part.oemNumber && (
+          <p className="text-sm">
+            <span className="text-muted-foreground">Or search the exact part number {part.oemNumber}: </span>
+            {links.filter((l) => !l.source.startsWith("ebay")).map((l, i) => (
+              <span key={l.source}>
+                {i > 0 && " · "}
+                <a href={l.oemUrl ?? l.url} target="_blank" rel="noopener noreferrer" className="font-medium underline underline-offset-2">
+                  {l.label}
+                </a>
+              </span>
+            ))}
+          </p>
+        )}
         <p className="text-xs text-muted-foreground">
           Links open marketplace search results{sort === "price-asc" ? " sorted by price" : sort === "newest" ? " sorted by newest where supported" : ""}.
         </p>

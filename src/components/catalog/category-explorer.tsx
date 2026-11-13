@@ -3,14 +3,17 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MEGAZIP_INDEX_URL, TOTAL_DIAGRAMS, type CatalogCategory, type CatalogDiagram } from "@/data/catalog";
 import { diagramColor, MODELS } from "@/data/models";
-import { partsForDiagram } from "@/data/parts";
-import { facebookUrl, lazadaUrl, shopeeUrl } from "@/lib/buy-links";
+import { DIAGRAMS, partsForDiagram } from "@/data/parts";
+import { ebayUrl, facebookUrl, lazadaUrl, searchQuery, shopeeUrl } from "@/lib/buy-links";
+import type { Part } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { InteractiveDiagram } from "./interactive-diagram";
+import { PartDetailSheet } from "./part-detail-sheet";
 
 // WebGL only exists in the browser.
 const CategoryViewer3D = dynamic(() => import("./category-viewer-3d"), {
@@ -23,22 +26,72 @@ const CategoryViewer3D = dynamic(() => import("./category-viewer-3d"), {
 });
 
 export function CategoryExplorer({ category }: { category: CatalogCategory }) {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  // Open on the first diagram that has an illustration, so the page starts with something recognisable.
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
+    const first = category.diagrams.find((d) => d.partsDiagramId && DIAGRAMS[d.partsDiagramId]);
+    return first ? first.indexInCategory : null;
+  });
+  const [viewIndex, setViewIndex] = useState(0);
+  const [part, setPart] = useState<Part | null>(null);
   const selected = selectedIndex !== null ? category.diagrams[selectedIndex] : null;
+  const illustration = selected?.partsDiagramId ? DIAGRAMS[selected.partsDiagramId] : undefined;
+  const illustrationParts = useMemo(() => (illustration ? partsForDiagram(illustration.id) : []), [illustration]);
+
+  // Views for the selected diagram: the black-and-white illustration first, then any 3D models.
+  const views = [
+    ...(illustration ? [{ label: "Illustration", model: null }] : []),
+    ...(selected?.models ?? []).map((m) => ({ label: `3D · ${m.label}`, model: m })),
+  ];
+  const view = views[viewIndex] ?? views[0] ?? null;
+  const model = view?.model ?? null;
+  const showIllustration = !!illustration && !!view && !view.model;
+
+  const select = (index: number | null) => {
+    setSelectedIndex(index);
+    setViewIndex(0);
+    setPart(null);
+  };
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
       <section aria-label="3D model">
-        <CategoryViewer3D
-          pieces={MODELS[category.id] ?? []}
-          diagrams={category.diagrams}
-          selectedIndex={selectedIndex}
-          onSelect={setSelectedIndex}
-          modelUrl={selected?.modelUrl ?? null}
-        />
+        {showIllustration ? (
+          <InteractiveDiagram
+            diagram={illustration}
+            parts={illustrationParts}
+            selectedId={part?.id ?? null}
+            onSelect={setPart}
+          />
+        ) : (
+          <CategoryViewer3D
+            pieces={MODELS[category.id] ?? []}
+            diagrams={category.diagrams}
+            selectedIndex={selectedIndex}
+            onSelect={select}
+            modelUrl={model?.url ?? null}
+            ownMaterials={model?.ownMaterials}
+          />
+        )}
+        {views.length > 1 && (
+          <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label="View">
+            {views.map((v, i) => (
+              <Button
+                key={v.label}
+                size="sm"
+                variant={v === view ? "default" : "outline"}
+                aria-pressed={v === view}
+                onClick={() => setViewIndex(i)}
+              >
+                {v.label}
+              </Button>
+            ))}
+          </div>
+        )}
         <p className="mt-2 text-xs text-muted-foreground">
-          {selected?.modelUrl
-            ? `Generated model of a typical ${selected.name.toLowerCase()} — generic shape, not an exact copy of the CK2A part. Deselect it to return to the category view.`
+          {showIllustration
+            ? "Tap a numbered part to see its OEM number and buy links. Illustration shows typical part shapes."
+            : model
+            ? `${model.note} Deselect the diagram to return to the category view.`
             : "Drag to rotate, pinch or scroll to zoom, tap a part to select it. Simplified illustration — not to scale."}
         </p>
       </section>
@@ -60,7 +113,7 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
                 <button
                   type="button"
                   aria-pressed={d.indexInCategory === selectedIndex}
-                  onClick={() => setSelectedIndex(d.indexInCategory === selectedIndex ? null : d.indexInCategory)}
+                  onClick={() => select(d.indexInCategory === selectedIndex ? null : d.indexInCategory)}
                   className={cn(
                     "flex min-h-11 w-full items-center gap-3 rounded-lg border px-3 py-2 text-left text-sm transition-colors hover:bg-muted",
                     d.indexInCategory === selectedIndex && "border-foreground bg-muted",
@@ -72,7 +125,7 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
                     style={{ background: diagramColor(d.indexInCategory) }}
                   />
                   <span className="min-w-0 flex-1 font-medium">{d.name}</span>
-                  {d.modelUrl && <Badge variant="secondary">3D model</Badge>}
+                  {d.models && <Badge variant="secondary">3D model</Badge>}
                   {d.partsDiagramId && <Badge>Parts ready</Badge>}
                 </button>
               </li>
@@ -80,17 +133,20 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
           </ul>
         </div>
       </section>
+      <PartDetailSheet part={part} sort="price-asc" onOpenChange={(open) => !open && setPart(null)} />
     </div>
   );
 }
 
 function DiagramDetail({ diagram, categoryName }: { diagram: CatalogDiagram; categoryName: string }) {
   const parts = diagram.partsDiagramId ? partsForDiagram(diagram.partsDiagramId) : [];
-  const query = `Mitsubishi Lancer 4G15 ${diagram.name.replace(/[,&/]/g, " ").replace(/\s+/g, " ")}`;
+  const query = searchQuery(diagram.name, diagram.categoryId);
   const links = [
     { label: "Shopee", url: shopeeUrl(query) },
     { label: "Lazada", url: lazadaUrl(query) },
     { label: "FB Marketplace", url: facebookUrl(query) },
+    { label: "eBay Philippines", url: ebayUrl(query, "ph") },
+    { label: "eBay US", url: ebayUrl(query, "us") },
   ];
 
   return (
@@ -140,6 +196,7 @@ function DiagramDetail({ diagram, categoryName }: { diagram: CatalogDiagram; cat
 
       <div className="flex flex-col gap-2">
         <h4 className="text-sm font-semibold">Search for these parts</h4>
+        <p className="text-xs text-muted-foreground">Searches for “{query}”.</p>
         {links.map((l) => (
           <Button key={l.label} asChild variant="outline" className="h-11 justify-between">
             <a href={l.url} target="_blank" rel="noopener noreferrer">

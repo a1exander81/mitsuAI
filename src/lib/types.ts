@@ -6,6 +6,8 @@ export interface Hotspot {
   shape: HotspotShape;
   /** Pixel coords in the diagram's natural size (see Diagram.width/height). */
   coords: number[];
+  /** Where the numbered callout badge sits, in the same pixel space. */
+  label: [number, number];
 }
 
 export interface Part {
@@ -15,7 +17,7 @@ export interface Part {
   verified: boolean;
   name: string;
   description: string;
-  category: "oil-pan" | "steering" | "suspension";
+  category: "oil-pan" | "engine" | "steering" | "suspension";
   diagramId: string;
   /** Callout code printed on the diagram (MegaZip PNC, e.g. "01500"). */
   callout: string;
