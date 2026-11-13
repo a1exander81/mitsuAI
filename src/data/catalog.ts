@@ -235,15 +235,15 @@ const SEEDED: Record<string, Pick<CatalogDiagram, "partsDiagramId" | "href" | "m
   "wheel-tire-cover": {
     models: [
       {
+        label: "AI-generated",
+        url: "/models/wheel-tire-cover.glb",
+        note: "Generated with Tripo text-to-3D. Generic shape, not an exact copy of the CK2A part.",
+      },
+      {
         label: "Scripted",
         url: "/models/wheel-tire-cover.scripted.glb",
         ownMaterials: true,
         note: "13-inch steel wheel and tire modelled in code (scripts/build-models.mjs). Typical shape, not measured from the CK2A part.",
-      },
-      {
-        label: "AI-generated",
-        url: "/models/wheel-tire-cover.glb",
-        note: "Generated with Tripo text-to-3D. Generic shape, not an exact copy of the CK2A part.",
       },
     ],
   },
