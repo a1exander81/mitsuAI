@@ -220,6 +220,9 @@ const RAW: [category: string, diagrams: RawDiagram[]][] = [
 
 /** Diagrams that already have seeded parts and/or a hotspot page. */
 const SEEDED: Record<string, Pick<CatalogDiagram, "partsDiagramId" | "href" | "models">> = {
+  "rocker-cover": { partsDiagramId: "rocker-cover" },
+  "cylinder-head": { partsDiagramId: "cylinder-head" },
+  "cylinder-block": { partsDiagramId: "cylinder-block" },
   "cover-rear-plate-oil-pan": {
     partsDiagramId: "oil-pan",
     href: "/diagrams/oil-pan",
