@@ -25,6 +25,9 @@ export interface Part {
     | "fuel"
     | "intake-exhaust"
     | "chassis"
+    | "engine-electrical"
+    | "clutch"
+    | "manual-transmission"
     | "steering"
     | "suspension";
   diagramId: string;
