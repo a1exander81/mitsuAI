@@ -245,7 +245,17 @@ const SEEDED: Record<
   string,
   Pick<CatalogDiagram, "partsDiagramId" | "href" | "models">
 > = {
-  "rocker-cover": { partsDiagramId: "rocker-cover" },
+  "rocker-cover": {
+    partsDiagramId: "rocker-cover",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/rocker-cover.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   "cylinder-head": {
     partsDiagramId: "cylinder-head",
     models: [
@@ -257,24 +267,120 @@ const SEEDED: Record<
       },
     ],
   },
-  "cylinder-block": { partsDiagramId: "cylinder-block" },
-  "piston-crankshaft": { partsDiagramId: "piston-crankshaft" },
-  "camshaft-valve": { partsDiagramId: "camshaft-valve" },
+  "cylinder-block": {
+    partsDiagramId: "cylinder-block",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/cylinder-block.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "piston-crankshaft": {
+    partsDiagramId: "piston-crankshaft",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/piston-crankshaft.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "camshaft-valve": {
+    partsDiagramId: "camshaft-valve",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/camshaft-valve.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   "oil-press-switch-or-gauge-unit": {
     partsDiagramId: "oil-press-switch-or-gauge-unit",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/oil-press-switch-or-gauge-unit.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
   },
-  "engine-mounting-support": { partsDiagramId: "engine-mounting-support" },
-  "engine-assy": { partsDiagramId: "engine-assy" },
-  "short-engine-assy": { partsDiagramId: "short-engine-assy" },
+  "engine-mounting-support": {
+    partsDiagramId: "engine-mounting-support",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/engine-mounting-support.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "engine-assy": {
+    partsDiagramId: "engine-assy",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/engine-assy.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "short-engine-assy": {
+    partsDiagramId: "short-engine-assy",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/short-engine-assy.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   "engine-overhaul-gasket-kit": {
     partsDiagramId: "engine-overhaul-gasket-kit",
   },
   "liquid-gasket": { partsDiagramId: "liquid-gasket" },
-  "fuel-tank": { partsDiagramId: "fuel-tank" },
+  "fuel-tank": {
+    partsDiagramId: "fuel-tank",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/fuel-tank.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   "fuel-line-vapor-gas-control": {
     partsDiagramId: "fuel-line-vapor-gas-control",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/fuel-line-vapor-gas-control.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
   },
-  "fuel-pump": { partsDiagramId: "fuel-pump" },
+  "fuel-pump": {
+    partsDiagramId: "fuel-pump",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/fuel-pump.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   carburetor: {
     partsDiagramId: "carburetor",
     models: [
@@ -286,15 +392,93 @@ const SEEDED: Record<
       },
     ],
   },
-  "engine-control": { partsDiagramId: "engine-control" },
-  "air-cleaner": { partsDiagramId: "air-cleaner" },
-  "inlet-manifold": { partsDiagramId: "inlet-manifold" },
-  "exhaust-manifold": { partsDiagramId: "exhaust-manifold" },
-  "exhaust-pipe-muffler": { partsDiagramId: "exhaust-pipe-muffler" },
-  "emission-control": { partsDiagramId: "emission-control" },
-  "oil-pump-oil-filter": { partsDiagramId: "oil-pump-oil-filter" },
+  "engine-control": {
+    partsDiagramId: "engine-control",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/engine-control.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "air-cleaner": {
+    partsDiagramId: "air-cleaner",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/air-cleaner.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "inlet-manifold": {
+    partsDiagramId: "inlet-manifold",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/inlet-manifold.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "exhaust-manifold": {
+    partsDiagramId: "exhaust-manifold",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/exhaust-manifold.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "exhaust-pipe-muffler": {
+    partsDiagramId: "exhaust-pipe-muffler",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/exhaust-pipe-muffler.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "emission-control": {
+    partsDiagramId: "emission-control",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/emission-control.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "oil-pump-oil-filter": {
+    partsDiagramId: "oil-pump-oil-filter",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/oil-pump-oil-filter.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   "radiator-hose-condenser-tank": {
     partsDiagramId: "radiator-hose-condenser-tank",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/radiator-hose-condenser-tank.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
   },
   "water-pump": {
     partsDiagramId: "water-pump",
@@ -307,11 +491,27 @@ const SEEDED: Record<
       },
     ],
   },
-  "water-pipe-thermostat": { partsDiagramId: "water-pipe-thermostat" },
+  "water-pipe-thermostat": {
+    partsDiagramId: "water-pipe-thermostat",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/water-pipe-thermostat.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   "cover-rear-plate-oil-pan": {
     partsDiagramId: "oil-pan",
     href: "/diagrams/oil-pan",
     models: [
+      {
+        label: "Generated",
+        url: "/models/cover-rear-plate-oil-pan.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
       {
         label: "Scripted",
         url: "/models/oil-pan.scripted.glb",
