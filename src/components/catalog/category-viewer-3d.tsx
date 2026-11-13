@@ -17,6 +17,8 @@ interface Props {
   onSelect: (index: number | null) => void;
   /** When set, this generated GLB is shown instead of the schematic category model. */
   modelUrl?: string | null;
+  /** Keep the GLB's own materials instead of the flat diagram colour. */
+  ownMaterials?: boolean;
 }
 
 const VIEW_DIR = new Vector3(1, 0.75, 1.25).normalize();
@@ -74,7 +76,7 @@ const MODEL_SIZE = 3;
 const MODEL_BOUNDS = { center: new Vector3(0, 0, 0), radius: (MODEL_SIZE * Math.sqrt(3)) / 2 };
 
 /** A generated GLB, recentred, scaled to a fixed size and given one flat material. */
-function GeneratedModel({ url, color }: { url: string; color: string }) {
+function GeneratedModel({ url, color, ownMaterials }: { url: string; color: string; ownMaterials?: boolean }) {
   const { scene } = useGLTF(url);
   const object = useMemo(() => {
     const clone = scene.clone(true);
@@ -83,12 +85,14 @@ function GeneratedModel({ url, color }: { url: string; color: string }) {
     const scale = MODEL_SIZE / Math.max(size.x, size.y, size.z, 1e-6);
     clone.scale.setScalar(scale);
     clone.position.copy(box.getCenter(new Vector3())).multiplyScalar(-scale);
-    const material = new MeshStandardMaterial({ color, roughness: 0.6, metalness: 0.25 });
-    clone.traverse((o) => {
-      if ((o as Mesh).isMesh) (o as Mesh).material = material;
-    });
+    if (!ownMaterials) {
+      const material = new MeshStandardMaterial({ color, roughness: 0.6, metalness: 0.25 });
+      clone.traverse((o) => {
+        if ((o as Mesh).isMesh) (o as Mesh).material = material;
+      });
+    }
     return clone;
-  }, [scene, color]);
+  }, [scene, color, ownMaterials]);
   return <primitive object={object} />;
 }
 
@@ -148,7 +152,7 @@ function CameraRig({
   );
 }
 
-export default function CategoryViewer3D({ pieces, diagrams, selectedIndex, onSelect, modelUrl }: Props) {
+export default function CategoryViewer3D({ pieces, diagrams, selectedIndex, onSelect, modelUrl, ownMaterials }: Props) {
   const [hovered, setHovered] = useState<number | null>(null);
   const rig = useRef<RigHandle | null>(null);
   const pieceBounds = useBounds(pieces);
@@ -185,10 +189,11 @@ export default function CategoryViewer3D({ pieces, diagrams, selectedIndex, onSe
         <ambientLight intensity={1.1} />
         <directionalLight position={[6, 10, 6]} intensity={1.6} />
         <directionalLight position={[-6, 4, -8]} intensity={0.6} />
+        <hemisphereLight args={["#ffffff", "#9ca3af", 0.9]} />
 
         {modelUrl && selectedIndex !== null && (
           <Suspense fallback={null}>
-            <GeneratedModel url={modelUrl} color={diagramColor(selectedIndex)} />
+            <GeneratedModel url={modelUrl} color={diagramColor(selectedIndex)} ownMaterials={ownMaterials} />
           </Suspense>
         )}
 

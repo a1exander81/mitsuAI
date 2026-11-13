@@ -33,6 +33,13 @@
       "batch": 6,
       "status": "active",
       "acceptance": "Home lists all 23 MegaZip categories (123 diagrams). Each category page shows a simple 3D model that can be rotated and zoomed (pinch, scroll, +/- buttons); tapping a part or its list row shows that diagram's data, seeded OEM parts where available, and Shopee/Lazada/FB search links. Works on a 375px-wide phone."
+    },
+    {
+      "id": "feat-005",
+      "name": "Scripted Part Models",
+      "batch": 6,
+      "status": "active",
+      "acceptance": "Diagrams can show one or more GLB part models with a version switch. Wheel & Tire has a scripted model alongside the AI-generated one; Cover, Rear Plate & Oil Pan has a scripted oil pan. Models are rebuilt with `node scripts/build-models.mjs`."
     }
   ]
 }

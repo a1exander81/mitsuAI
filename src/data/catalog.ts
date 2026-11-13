@@ -12,6 +12,15 @@
 export const MEGAZIP_INDEX_URL =
   "https://www.megazip.net/parts/mitsubishi/diagrams/lancer_china/ck2a-ge-1500_2wd_sedan-snjl1c";
 
+export interface PartModel {
+  label: string;
+  /** Path under /public. */
+  url: string;
+  /** Keep the GLB's own materials instead of the flat diagram colour. */
+  ownMaterials?: boolean;
+  note: string;
+}
+
 export interface CatalogDiagram {
   id: string;
   /** 1-based position in the MegaZip "All diagrams" list. */
@@ -26,8 +35,8 @@ export interface CatalogDiagram {
   partsDiagramId?: string;
   /** Set when a hotspot diagram page exists for it. */
   href?: string;
-  /** Generated GLB model of the diagram's main component, under /public. */
-  modelUrl?: string;
+  /** GLB models of the diagram's main component; the first is shown by default. */
+  models?: PartModel[];
 }
 
 export interface CatalogCategory {
@@ -210,9 +219,34 @@ const RAW: [category: string, diagrams: RawDiagram[]][] = [
 ];
 
 /** Diagrams that already have seeded parts and/or a hotspot page. */
-const SEEDED: Record<string, Pick<CatalogDiagram, "partsDiagramId" | "href" | "modelUrl">> = {
-  "cover-rear-plate-oil-pan": { partsDiagramId: "oil-pan", href: "/diagrams/oil-pan" },
-  "wheel-tire-cover": { modelUrl: "/models/wheel-tire-cover.glb" },
+const SEEDED: Record<string, Pick<CatalogDiagram, "partsDiagramId" | "href" | "models">> = {
+  "cover-rear-plate-oil-pan": {
+    partsDiagramId: "oil-pan",
+    href: "/diagrams/oil-pan",
+    models: [
+      {
+        label: "Scripted",
+        url: "/models/oil-pan.scripted.glb",
+        ownMaterials: true,
+        note: "Oil pan modelled in code (scripts/build-models.mjs). Typical shape, not measured from the CK2A part.",
+      },
+    ],
+  },
+  "wheel-tire-cover": {
+    models: [
+      {
+        label: "Scripted",
+        url: "/models/wheel-tire-cover.scripted.glb",
+        ownMaterials: true,
+        note: "13-inch steel wheel and tire modelled in code (scripts/build-models.mjs). Typical shape, not measured from the CK2A part.",
+      },
+      {
+        label: "AI-generated",
+        url: "/models/wheel-tire-cover.glb",
+        note: "Generated with Tripo text-to-3D. Generic shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
 };
 
 const slug = (s: string) =>

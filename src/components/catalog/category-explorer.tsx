@@ -24,7 +24,15 @@ const CategoryViewer3D = dynamic(() => import("./category-viewer-3d"), {
 
 export function CategoryExplorer({ category }: { category: CatalogCategory }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [modelIndex, setModelIndex] = useState(0);
   const selected = selectedIndex !== null ? category.diagrams[selectedIndex] : null;
+  const models = selected?.models ?? [];
+  const model = models[modelIndex] ?? models[0] ?? null;
+
+  const select = (index: number | null) => {
+    setSelectedIndex(index);
+    setModelIndex(0);
+  };
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
@@ -33,12 +41,28 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
           pieces={MODELS[category.id] ?? []}
           diagrams={category.diagrams}
           selectedIndex={selectedIndex}
-          onSelect={setSelectedIndex}
-          modelUrl={selected?.modelUrl ?? null}
+          onSelect={select}
+          modelUrl={model?.url ?? null}
+          ownMaterials={model?.ownMaterials}
         />
+        {models.length > 1 && (
+          <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label="Model version">
+            {models.map((m, i) => (
+              <Button
+                key={m.url}
+                size="sm"
+                variant={m === model ? "default" : "outline"}
+                aria-pressed={m === model}
+                onClick={() => setModelIndex(i)}
+              >
+                {m.label}
+              </Button>
+            ))}
+          </div>
+        )}
         <p className="mt-2 text-xs text-muted-foreground">
-          {selected?.modelUrl
-            ? `Generated model of a typical ${selected.name.toLowerCase()} — generic shape, not an exact copy of the CK2A part. Deselect it to return to the category view.`
+          {model
+            ? `${model.note} Deselect the diagram to return to the category view.`
             : "Drag to rotate, pinch or scroll to zoom, tap a part to select it. Simplified illustration — not to scale."}
         </p>
       </section>
@@ -60,7 +84,7 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
                 <button
                   type="button"
                   aria-pressed={d.indexInCategory === selectedIndex}
-                  onClick={() => setSelectedIndex(d.indexInCategory === selectedIndex ? null : d.indexInCategory)}
+                  onClick={() => select(d.indexInCategory === selectedIndex ? null : d.indexInCategory)}
                   className={cn(
                     "flex min-h-11 w-full items-center gap-3 rounded-lg border px-3 py-2 text-left text-sm transition-colors hover:bg-muted",
                     d.indexInCategory === selectedIndex && "border-foreground bg-muted",
@@ -72,7 +96,7 @@ export function CategoryExplorer({ category }: { category: CatalogCategory }) {
                     style={{ background: diagramColor(d.indexInCategory) }}
                   />
                   <span className="min-w-0 flex-1 font-medium">{d.name}</span>
-                  {d.modelUrl && <Badge variant="secondary">3D model</Badge>}
+                  {d.models && <Badge variant="secondary">3D model</Badge>}
                   {d.partsDiagramId && <Badge>Parts ready</Badge>}
                 </button>
               </li>
