@@ -28,6 +28,12 @@ export interface Part {
     | "engine-electrical"
     | "clutch"
     | "manual-transmission"
+    | "front-axle"
+    | "rear-axle"
+    | "wheel-tire"
+    | "front-suspension"
+    | "rear-suspension"
+    | "brake"
     | "steering"
     | "suspension";
   diagramId: string;

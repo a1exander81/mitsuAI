@@ -72,8 +72,10 @@ function useBounds(pieces: Piece[]) {
   }, [pieces]);
 }
 
+// Models are scaled so their bounding-box diagonal is MODEL_SIZE. Sizing by the diagonal (not the
+// longest side) keeps compact parts like pumps from overflowing the view while long parts still fill it.
 const MODEL_SIZE = 3;
-const MODEL_BOUNDS = { center: new Vector3(0, 0, 0), radius: (MODEL_SIZE * Math.sqrt(3)) / 2 };
+const MODEL_BOUNDS = { center: new Vector3(0, 0, 0), radius: (MODEL_SIZE / 2) * 1.45 };
 
 /** A generated GLB, recentred, scaled to a fixed size and given one flat material. */
 function GeneratedModel({ url, color, ownMaterials }: { url: string; color: string; ownMaterials?: boolean }) {
@@ -82,7 +84,7 @@ function GeneratedModel({ url, color, ownMaterials }: { url: string; color: stri
     const clone = scene.clone(true);
     const box = new Box3().setFromObject(clone);
     const size = box.getSize(new Vector3());
-    const scale = MODEL_SIZE / Math.max(size.x, size.y, size.z, 1e-6);
+    const scale = MODEL_SIZE / Math.max(size.length(), 1e-6);
     clone.scale.setScalar(scale);
     clone.position.copy(box.getCenter(new Vector3())).multiplyScalar(-scale);
     if (!ownMaterials) {
