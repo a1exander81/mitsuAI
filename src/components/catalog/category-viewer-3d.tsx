@@ -1,6 +1,6 @@
 "use client";
 
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { Environment, Lightformer, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas, useThree, type ThreeEvent } from "@react-three/fiber";
 import { Minus, Plus, RotateCcw } from "lucide-react";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -178,6 +178,16 @@ export default function CategoryViewer3D({ pieces, diagrams, selectedIndex, onSe
         <directionalLight position={[6, 10, 6]} intensity={1.6} />
         <directionalLight position={[-6, 4, -8]} intensity={0.6} />
         <hemisphereLight args={["#ffffff", "#9ca3af", 0.9]} />
+        {/* Soft studio reflections so metallic (PBR) part models don't render black. Built from
+            Lightformers, so no HDR file is downloaded. */}
+        {modelUrl && (
+          <Environment resolution={256}>
+            <Lightformer intensity={2} position={[0, 5, 0]} rotation-x={Math.PI / 2} scale={[10, 10, 1]} />
+            <Lightformer intensity={1.2} position={[-5, 1, 2]} rotation-y={Math.PI / 2} scale={[8, 4, 1]} />
+            <Lightformer intensity={1.2} position={[5, 1, -2]} rotation-y={-Math.PI / 2} scale={[8, 4, 1]} />
+            <Lightformer intensity={0.6} position={[0, 1, -5]} scale={[10, 4, 1]} />
+          </Environment>
+        )}
 
         {modelUrl && selectedIndex !== null && (
           <Suspense fallback={null}>
