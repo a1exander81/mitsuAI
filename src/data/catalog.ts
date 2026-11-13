@@ -245,6 +245,128 @@ const SEEDED: Record<
   string,
   Pick<CatalogDiagram, "partsDiagramId" | "href" | "models">
 > = {
+  starter: {
+    partsDiagramId: "starter",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/starter.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "alternator-vacuum-pump": {
+    partsDiagramId: "alternator-vacuum-pump",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/alternator-vacuum-pump.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  distributor: {
+    partsDiagramId: "distributor",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/distributor.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "spark-plug-cable-coil": {
+    partsDiagramId: "spark-plug-cable-coil",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/spark-plug-cable-coil.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "electrical-control": { partsDiagramId: "electrical-control" },
+  "clutch-clutch-release": {
+    partsDiagramId: "clutch-clutch-release",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/clutch-clutch-release.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "clutch-control": {
+    partsDiagramId: "clutch-control",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/clutch-control.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "manual-transmission-assy": {
+    partsDiagramId: "manual-transmission-assy",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/manual-transmission-assy.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "m-t-case": {
+    partsDiagramId: "m-t-case",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/m-t-case.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "m-t-gear": {
+    partsDiagramId: "m-t-gear",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/m-t-gear.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "m-t-gearshift-control": {
+    partsDiagramId: "m-t-gearshift-control",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/m-t-gearshift-control.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "m-t-floor-shift-linkage": {
+    partsDiagramId: "m-t-floor-shift-linkage",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/m-t-floor-shift-linkage.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
   "rocker-cover": {
     partsDiagramId: "rocker-cover",
     models: [
