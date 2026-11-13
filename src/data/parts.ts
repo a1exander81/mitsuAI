@@ -18,10 +18,15 @@ import type { Diagram, Part } from "@/lib/types";
 export const OIL_PAN_DIAGRAM: Diagram = {
   id: "oil-pan",
   title: "Cover, Rear Plate & Oil Pan — 4G15 (CK2A 1500)",
-  src: "/diagrams/oil-pan.svg",
-  width: 800,
-  height: 600,
+  // Original exploded illustration generated for this app (Higgsfield, GPT Image);
+  // it shows typical part shapes and is not MegaZip or Mitsubishi artwork.
+  src: "/diagrams/oil-pan.png",
+  width: 1168,
+  height: 880,
 };
+
+/** Hotspot diagrams by id (matches Part.diagramId and CatalogDiagram.partsDiagramId). */
+export const DIAGRAMS: Record<string, Diagram> = { [OIL_PAN_DIAGRAM.id]: OIL_PAN_DIAGRAM };
 
 export const PARTS: Part[] = [
   {
@@ -34,7 +39,7 @@ export const PARTS: Part[] = [
     category: "oil-pan",
     diagramId: "oil-pan",
     callout: "GASKET",
-    hotspot: { shape: "rect", coords: [196, 334, 584, 364] },
+    hotspot: { shape: "poly", coords: [181, 450, 327, 342, 923, 447, 777, 572], label: [152, 420] },
     imageUrl: null,
     notes:
       "Genuine Mitsubishi number, but not listed in the CK2A 1500 catalog — the factory uses liquid gasket here and MegaZip lists this gasket for the Mirage C11A. Check fit before buying.",
@@ -53,7 +58,8 @@ export const PARTS: Part[] = [
     callout: "01500",
     hotspot: {
       shape: "poly",
-      coords: [208, 364, 572, 364, 545, 440, 400, 440, 390, 505, 260, 505, 250, 440, 232, 440],
+      coords: [187, 613, 350, 528, 917, 640, 899, 701, 759, 777, 654, 870, 467, 870, 450, 748, 234, 701],
+      label: [158, 590],
     },
     imageUrl: null,
     estPricePhp: { min: 1800, max: 4500 },
@@ -69,7 +75,7 @@ export const PARTS: Part[] = [
     category: "oil-pan",
     diagramId: "oil-pan",
     callout: "01512",
-    hotspot: { shape: "rect", coords: [64, 450, 134, 506] },
+    hotspot: { shape: "rect", coords: [18, 715, 126, 780], label: [47, 683] },
     imageUrl: null,
     estPricePhp: { min: 120, max: 350 },
     addedAt: "2026-11-12",
@@ -84,7 +90,7 @@ export const PARTS: Part[] = [
     category: "oil-pan",
     diagramId: "oil-pan",
     callout: "01521",
-    hotspot: { shape: "circle", coords: [190, 478, 24] },
+    hotspot: { shape: "circle", coords: [172, 748, 30], label: [172, 695] },
     imageUrl: null,
     estPricePhp: { min: 20, max: 80 },
     addedAt: "2026-11-10",
@@ -99,7 +105,7 @@ export const PARTS: Part[] = [
     category: "oil-pan",
     diagramId: "oil-pan",
     callout: "01597",
-    hotspot: { shape: "rect", coords: [592, 384, 648, 426] },
+    hotspot: { shape: "rect", coords: [967, 691, 1034, 823], label: [1070, 683] },
     imageUrl: null,
     notes: "18 pcs per engine.",
     estPricePhp: { min: 15, max: 60 },
@@ -115,7 +121,11 @@ export const PARTS: Part[] = [
     category: "oil-pan",
     diagramId: "oil-pan",
     callout: "04124",
-    hotspot: { shape: "rect", coords: [290, 278, 392, 316] },
+    hotspot: {
+      shape: "poly",
+      coords: [376, 35, 496, 26, 496, 82, 607, 210, 668, 280, 654, 350, 514, 350, 496, 280, 432, 175, 385, 82],
+      label: [530, 47],
+    },
     imageUrl: null,
     estPricePhp: { min: 600, max: 1500 },
     addedAt: "2026-11-08",
@@ -130,7 +140,7 @@ export const PARTS: Part[] = [
     category: "oil-pan",
     diagramId: "oil-pan",
     callout: "04161",
-    hotspot: { shape: "rect", coords: [220, 254, 288, 290] },
+    hotspot: { shape: "rect", coords: [187, 61, 313, 131], label: [165, 50] },
     imageUrl: null,
     estPricePhp: { min: 50, max: 180 },
     addedAt: "2026-11-13",
@@ -145,7 +155,11 @@ export const PARTS: Part[] = [
     category: "oil-pan",
     diagramId: "oil-pan",
     callout: "02122",
-    hotspot: { shape: "poly", coords: [520, 50, 640, 40, 665, 90, 660, 190, 560, 205, 515, 150] },
+    hotspot: {
+      shape: "poly",
+      coords: [806, 140, 923, 14, 1057, 53, 1139, 175, 1139, 350, 1098, 364, 934, 306, 858, 292, 847, 210, 812, 187],
+      label: [818, 62],
+    },
     imageUrl: null,
     notes: "MegaZip shows a replacement (superseding) number for this part — check before ordering.",
     estPricePhp: { min: 900, max: 2500 },
@@ -155,3 +169,7 @@ export const PARTS: Part[] = [
 
 export const partsForDiagram = (diagramId: string) =>
   PARTS.filter((p) => p.diagramId === diagramId);
+
+/** Callout number shown on the illustration and in the parts list (1-based, stable). */
+export const partNumber = (part: Part) =>
+  partsForDiagram(part.diagramId).findIndex((p) => p.id === part.id) + 1;

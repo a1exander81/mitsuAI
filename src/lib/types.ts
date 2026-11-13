@@ -6,6 +6,8 @@ export interface Hotspot {
   shape: HotspotShape;
   /** Pixel coords in the diagram's natural size (see Diagram.width/height). */
   coords: number[];
+  /** Where the numbered callout badge sits, in the same pixel space. */
+  label: [number, number];
 }
 
 export interface Part {

@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
+import { partNumber } from "@/data/parts";
 import { formatPhp } from "@/lib/sort";
 import type { Part } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -25,13 +26,13 @@ export function PartsList({ parts, selectedId, onSelect }: Props) {
               p.id === selectedId && "bg-muted",
             )}
           >
-            <span className="flex h-7 w-16 shrink-0 items-center justify-center rounded-md border border-blue-700 font-mono text-[11px] font-bold text-blue-700">
-              {p.callout}
+            <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-black bg-white text-sm font-bold text-black">
+              {partNumber(p)}
             </span>
             <span className="min-w-0 flex-1">
               <span className="block truncate font-medium">{p.name}</span>
               <span className="block font-mono text-xs text-muted-foreground">
-                {p.oemNumber ?? "OEM # TBD"}
+                {p.oemNumber ?? "OEM # TBD"} · {p.callout}
               </span>
             </span>
             <span className="text-right text-sm tabular-nums">
