@@ -1,6 +1,10 @@
 {
   "project": "LancerParts",
-  "statuses": ["not_started", "active", "passing"],
+  "statuses": [
+    "not_started",
+    "active",
+    "passing"
+  ],
   "features": [
     {
       "id": "feat-001",
@@ -22,6 +26,13 @@
       "batch": 4,
       "status": "not_started",
       "acceptance": "On first visit the user picks a preferred area (Quezon City / NCR, Region 1, Baguio, ...) or uses browser geolocation; the choice persists and is shown in the header."
+    },
+    {
+      "id": "feat-004",
+      "name": "3D Category Explorer",
+      "batch": 6,
+      "status": "active",
+      "acceptance": "Home lists all 23 MegaZip categories (123 diagrams). Each category page shows a simple 3D model that can be rotated and zoomed (pinch, scroll, +/- buttons); tapping a part or its list row shows that diagram's data, seeded OEM parts where available, and Shopee/Lazada/FB search links. Works on a 375px-wide phone."
     }
   ]
 }
