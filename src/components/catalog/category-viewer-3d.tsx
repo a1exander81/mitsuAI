@@ -1,6 +1,6 @@
 "use client";
 
-import { Html, OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas, useThree, type ThreeEvent } from "@react-three/fiber";
 import { Minus, Plus, RotateCcw } from "lucide-react";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -158,19 +158,7 @@ export default function CategoryViewer3D({ pieces, diagrams, selectedIndex, onSe
   const pieceBounds = useBounds(pieces);
   const { center, radius } = modelUrl ? MODEL_BOUNDS : pieceBounds;
 
-  // One label per diagram, anchored above its first piece.
-  const labelAnchors = useMemo(() => {
-    const anchors = new Map<number, Vec3>();
-    for (const piece of pieces) {
-      if (piece.d < 0) continue;
-      const current = anchors.get(piece.d);
-      if (!current || piece.p[1] > current[1]) anchors.set(piece.d, piece.p);
-    }
-    return anchors;
-  }, [pieces]);
-
   const labelled = modelUrl ? null : (hovered ?? selectedIndex);
-  const labelPos = labelled !== null ? labelAnchors.get(labelled) : undefined;
 
   const onPieceClick = (e: ThreeEvent<MouseEvent>, d: number) => {
     e.stopPropagation();
@@ -242,17 +230,21 @@ export default function CategoryViewer3D({ pieces, diagrams, selectedIndex, onSe
           );
         })}
 
-        {labelled !== null && labelPos && diagrams[labelled] && (
-          <Html position={[labelPos[0], labelPos[1] + 0.45, labelPos[2]]} center style={{ pointerEvents: "none" }}>
-            <div className="rounded-md border bg-background/95 px-2 py-1 text-xs font-medium whitespace-nowrap shadow-sm">
-              {diagrams[labelled].name}
-            </div>
-          </Html>
-        )}
 
         <gridHelper args={[14, 14, "#94a3b8", "#cbd5e1"]} position={[center.x, center.y - radius * 0.62, center.z]} />
         <CameraRig center={center} radius={radius} handle={rig} />
       </Canvas>
+
+      {/* Name of the hovered (or selected) diagram. A plain overlay rather than drei's <Html>,
+          which creates its own React root and warns when React remounts it in development. */}
+      {!modelUrl && labelled !== null && diagrams[labelled] && (
+        <div
+          aria-live="polite"
+          className="pointer-events-none absolute top-2 left-2 rounded-md border bg-background/95 px-2 py-1 text-xs font-medium shadow-sm"
+        >
+          {diagrams[labelled].name}
+        </div>
+      )}
 
       <div className="absolute right-2 bottom-2 flex flex-col gap-1.5">
         <Button size="icon" variant="secondary" aria-label="Zoom in" onClick={() => rig.current?.zoom(0.75)}>
