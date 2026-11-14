@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { ArrowDown } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -36,7 +37,14 @@ export function Hero() {
         gsap.fromTo(
           "[data-hero-bg]",
           { scale: 1.08, xPercent: 0 },
-          { scale: 1.16, xPercent: -2, duration: 24, ease: "sine.inOut", repeat: -1, yoyo: true },
+          {
+            scale: 1.16,
+            xPercent: -2,
+            duration: 24,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+          },
         );
 
         // Entrance. autoSplit re-splits once Geist has loaded so line breaks stay correct.
@@ -47,10 +55,26 @@ export function Hero() {
           onSplit(self) {
             const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
             tl.from("[data-hero-badge]", { autoAlpha: 0, y: 12, duration: 0.5 })
-              .from(self.words, { yPercent: 110, duration: 0.8, stagger: 0.06 }, "-=0.15")
-              .from("[data-hero-sub]", { autoAlpha: 0, y: 16, duration: 0.6 }, "-=0.45")
-              .from("[data-hero-cta]", { autoAlpha: 0, y: 16, duration: 0.5 }, "-=0.35")
-              .from("[data-hero-tag]", { autoAlpha: 0, y: 8, duration: 0.4, stagger: 0.08 }, "-=0.25");
+              .from(
+                self.words,
+                { yPercent: 110, duration: 0.8, stagger: 0.06 },
+                "-=0.15",
+              )
+              .from(
+                "[data-hero-sub]",
+                { autoAlpha: 0, y: 16, duration: 0.6 },
+                "-=0.45",
+              )
+              .from(
+                "[data-hero-cta]",
+                { autoAlpha: 0, y: 16, duration: 0.5 },
+                "-=0.35",
+              )
+              .from(
+                "[data-hero-tag]",
+                { autoAlpha: 0, y: 8, duration: 0.4, stagger: 0.08 },
+                "-=0.25",
+              );
             return tl;
           },
         });
@@ -60,10 +84,20 @@ export function Hero() {
   );
 
   const onEnter = contextSafe((e: React.PointerEvent<HTMLElement>) => {
-    gsap.to(e.currentTarget, { y: -2, scale: 1.03, duration: 0.25, ease: "power2.out" });
+    gsap.to(e.currentTarget, {
+      y: -2,
+      scale: 1.03,
+      duration: 0.25,
+      ease: "power2.out",
+    });
   });
   const onLeave = contextSafe((e: React.PointerEvent<HTMLElement>) => {
-    gsap.to(e.currentTarget, { y: 0, scale: 1, duration: 0.3, ease: "power2.out" });
+    gsap.to(e.currentTarget, {
+      y: 0,
+      scale: 1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
   });
 
   return (
@@ -73,7 +107,10 @@ export function Hero() {
       className="relative isolate flex min-h-[85vh] w-full items-center overflow-hidden bg-neutral-950 text-white"
     >
       {/* Background image, slightly oversized so the Ken Burns zoom never shows an edge. */}
-      <div data-hero-bg className="absolute inset-0 -z-20 scale-[1.08] will-change-transform">
+      <div
+        data-hero-bg
+        className="absolute inset-0 -z-20 scale-[1.08] will-change-transform"
+      >
         <Image
           src="/hero/evo-style.webp"
           alt=""
@@ -85,8 +122,14 @@ export function Hero() {
       </div>
 
       {/* Readability overlays: stronger on the left (text side) and at the bottom. */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/60 to-black/10" />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/60 to-black/10"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-transparent to-black/30"
+      />
 
       <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
@@ -105,9 +148,13 @@ export function Hero() {
             Restore your Mitsubishi. Explore every part in 3D.
           </h1>
 
-          <p data-hero-sub className="mt-5 max-w-xl text-base text-white/75 sm:text-lg">
-            Interactive diagrams and OEM part numbers for DIY restorers — starting with the classic Lancer, with
-            more Mitsubishi models to come.
+          <p
+            data-hero-sub
+            className="mt-5 max-w-xl text-base text-white/75 sm:text-lg"
+          >
+            Interactive diagrams and OEM part numbers for DIY restorers —
+            starting with the classic Lancer, with more Mitsubishi models to
+            come.
           </p>
 
           <div data-hero-cta className="mt-8 flex flex-wrap items-center gap-3">
@@ -123,12 +170,31 @@ export function Hero() {
                 <ArrowDown data-icon="inline-end" />
               </a>
             </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="h-11 border-white/30 bg-white/5 px-5 text-base text-white hover:bg-white/15 hover:text-white"
+              onPointerEnter={onEnter}
+              onPointerLeave={onLeave}
+            >
+              <Link href="/upgrades" onClick={() => track("hero_upgrades")}>
+                Upgrades
+              </Link>
+            </Button>
           </div>
 
-          <ul className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-sm text-white/60" aria-label="Highlights">
+          <ul
+            className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-sm text-white/60"
+            aria-label="Highlights"
+          >
             {TAGS.map((tag, i) => (
               <li key={tag} data-hero-tag className="flex items-center gap-4">
-                {i > 0 && <span aria-hidden className="text-white/30">•</span>}
+                {i > 0 && (
+                  <span aria-hidden className="text-white/30">
+                    •
+                  </span>
+                )}
                 {tag}
               </li>
             ))}
