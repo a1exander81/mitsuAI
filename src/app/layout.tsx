@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -14,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "LancerParts — 4G15 Catalog",
-  description: "Interactive parts diagrams for the Mitsubishi Lancer CK2A 4G15 with PH buy links",
+  description:
+    "Interactive parts diagrams for the Mitsubishi Lancer CK2A 4G15 with PH buy links",
 };
 
 export default function RootLayout({
@@ -23,9 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
+    >
       <body className="antialiased">
         {children}
+        <Analytics />
       </body>
     </html>
   );
