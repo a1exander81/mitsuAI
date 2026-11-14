@@ -9,10 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^9.8.2",
+    "@vercel/analytics": "^2.0.1",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.2",
+    "gsap": "^3.15.1",
     "lucide-react": "^1.72.0",
     "next": "15.5.29",
     "radix-ui": "^1.8.1",
