@@ -245,6 +245,173 @@ const SEEDED: Record<
   string,
   Pick<CatalogDiagram, "partsDiagramId" | "href" | "models">
 > = {
+  "front-bumper-support": {
+    partsDiagramId: "front-bumper-support",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/front-bumper-support.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "rear-bumper-support": { partsDiagramId: "rear-bumper-support" },
+  "radiator-grille-headlamp-bezel": {
+    partsDiagramId: "radiator-grille-headlamp-bezel",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/radiator-grille-headlamp-bezel.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "hood-lock": { partsDiagramId: "hood-lock" },
+  "fender-front-end-cover": { partsDiagramId: "fender-front-end-cover" },
+  "front-end-panel": { partsDiagramId: "front-end-panel" },
+  "front-deck-insulator": { partsDiagramId: "front-deck-insulator" },
+  "windshield-glass-moulding": { partsDiagramId: "windshield-glass-moulding" },
+  "roof-lid": { partsDiagramId: "roof-lid" },
+  "side-structure": { partsDiagramId: "side-structure" },
+  "fuel-filler-lid-lock": { partsDiagramId: "fuel-filler-lid-lock" },
+  floor: { partsDiagramId: "floor" },
+  "rear-end-structure": { partsDiagramId: "rear-end-structure" },
+  "rear-window-glass-moulding": {
+    partsDiagramId: "rear-window-glass-moulding",
+  },
+  "trunk-lid-lock": { partsDiagramId: "trunk-lid-lock" },
+  "loose-panel": { partsDiagramId: "loose-panel" },
+  "plugs-covers-shield": { partsDiagramId: "plugs-covers-shield" },
+  "lock-cylinder-key": { partsDiagramId: "lock-cylinder-key" },
+  "front-door-panel-glass": { partsDiagramId: "front-door-panel-glass" },
+  "front-door-window-regulator": {
+    partsDiagramId: "front-door-window-regulator",
+  },
+  "front-door-locking": { partsDiagramId: "front-door-locking" },
+  "front-door-trim-pull-handle": {
+    partsDiagramId: "front-door-trim-pull-handle",
+  },
+  "rear-door-panel-glass": { partsDiagramId: "rear-door-panel-glass" },
+  "rear-door-window-regulator": {
+    partsDiagramId: "rear-door-window-regulator",
+  },
+  "rear-door-locking": { partsDiagramId: "rear-door-locking" },
+  "rear-door-trim-pull-handle": {
+    partsDiagramId: "rear-door-trim-pull-handle",
+  },
+  "front-garnish-moulding": { partsDiagramId: "front-garnish-moulding" },
+  "side-garnish-moulding": { partsDiagramId: "side-garnish-moulding" },
+  "rear-garnish-moulding": { partsDiagramId: "rear-garnish-moulding" },
+  "ornament-mark-emblem": { partsDiagramId: "ornament-mark-emblem" },
+  "outside-rear-view-mirror": {
+    partsDiagramId: "outside-rear-view-mirror",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/outside-rear-view-mirror.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "mud-guard-shield-stone-guard": {
+    partsDiagramId: "mud-guard-shield-stone-guard",
+  },
+  "i-panel-related-parts": { partsDiagramId: "i-panel-related-parts" },
+  console: { partsDiagramId: "console" },
+  "mirror-grips-sunvisor": { partsDiagramId: "mirror-grips-sunvisor" },
+  headlining: { partsDiagramId: "headlining" },
+  "interior-trim": { partsDiagramId: "interior-trim" },
+  "baggage-room-trim": { partsDiagramId: "baggage-room-trim" },
+  "floor-mat": { partsDiagramId: "floor-mat" },
+  silencer: { partsDiagramId: "silencer" },
+  "front-seat": {
+    partsDiagramId: "front-seat",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/front-seat.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "rear-seat": { partsDiagramId: "rear-seat" },
+  "seat-belt": { partsDiagramId: "seat-belt" },
+  headlamp: {
+    partsDiagramId: "headlamp",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/headlamp.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "front-exterior-lamp": {
+    partsDiagramId: "front-exterior-lamp",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/front-exterior-lamp.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "rear-exterior-lamp": { partsDiagramId: "rear-exterior-lamp" },
+  "room-lamp": { partsDiagramId: "room-lamp" },
+  "windshield-wiper-washer": {
+    partsDiagramId: "windshield-wiper-washer",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/windshield-wiper-washer.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "meter-gauge-clock": { partsDiagramId: "meter-gauge-clock" },
+  "switch-cigar-lighter": { partsDiagramId: "switch-cigar-lighter" },
+  "radio-audio-accessories": { partsDiagramId: "radio-audio-accessories" },
+  speaker: { partsDiagramId: "speaker" },
+  "antenna-condenser": { partsDiagramId: "antenna-condenser" },
+  "horn-buzzer": { partsDiagramId: "horn-buzzer" },
+  "relay-flasher-sensor": { partsDiagramId: "relay-flasher-sensor" },
+  "battery-cable-bracket": { partsDiagramId: "battery-cable-bracket" },
+  "wiring-attaching-parts": { partsDiagramId: "wiring-attaching-parts" },
+  "heater-unit-piping": {
+    partsDiagramId: "heater-unit-piping",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/heater-unit-piping.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "heater-control": { partsDiagramId: "heater-control" },
+  "defroster-nozzle-duct": { partsDiagramId: "defroster-nozzle-duct" },
+  "ventilation-duct": { partsDiagramId: "ventilation-duct" },
+  "a-c-unit": { partsDiagramId: "a-c-unit" },
+  "a-c-condenser-piping": {
+    partsDiagramId: "a-c-condenser-piping",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/a-c-condenser-piping.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "standard-tool": { partsDiagramId: "standard-tool" },
+  "owners-guide": { partsDiagramId: "owners-guide" },
   "front-axle-drive-shaft": {
     partsDiagramId: "front-axle-drive-shaft",
     models: [

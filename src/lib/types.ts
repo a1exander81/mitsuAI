@@ -34,6 +34,14 @@ export interface Part {
     | "front-suspension"
     | "rear-suspension"
     | "brake"
+    | "body"
+    | "door"
+    | "exterior"
+    | "interior"
+    | "seat"
+    | "chassis-electrical"
+    | "heater-ac"
+    | "tool"
     | "steering"
     | "suspension";
   diagramId: string;
