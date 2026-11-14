@@ -245,6 +245,184 @@ const SEEDED: Record<
   string,
   Pick<CatalogDiagram, "partsDiagramId" | "href" | "models">
 > = {
+  "front-axle-drive-shaft": {
+    partsDiagramId: "front-axle-drive-shaft",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/front-axle-drive-shaft.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "front-axle-hub-drum": {
+    partsDiagramId: "front-axle-hub-drum",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/front-axle-hub-drum.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "rear-axle-hub-drum": {
+    partsDiagramId: "rear-axle-hub-drum",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/rear-axle-hub-drum.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "front-susp-arm-member": {
+    partsDiagramId: "front-susp-arm-member",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/front-susp-arm-member.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "front-susp-strut-spring": {
+    partsDiagramId: "front-susp-strut-spring",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/front-susp-strut-spring.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "rear-susp": {
+    partsDiagramId: "rear-susp",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/rear-susp.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "parking-brake-control": {
+    partsDiagramId: "parking-brake-control",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/parking-brake-control.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "front-wheel-brake": {
+    partsDiagramId: "front-wheel-brake",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/front-wheel-brake.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "rear-wheel-brake": {
+    partsDiagramId: "rear-wheel-brake",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/rear-wheel-brake.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "power-brake-booster": {
+    partsDiagramId: "power-brake-booster",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/power-brake-booster.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "brake-line": { partsDiagramId: "brake-line" },
+  "brake-clutch-pedal": {
+    partsDiagramId: "brake-clutch-pedal",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/brake-clutch-pedal.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "brake-master-cylinder": {
+    partsDiagramId: "brake-master-cylinder",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/brake-master-cylinder.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "steering-wheel": {
+    partsDiagramId: "steering-wheel",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/steering-wheel.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "steering-column-cover": {
+    partsDiagramId: "steering-column-cover",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/steering-column-cover.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "steering-gear": {
+    partsDiagramId: "steering-gear",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/steering-gear.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "power-steering-oil-pump": {
+    partsDiagramId: "power-steering-oil-pump",
+    models: [
+      {
+        label: "Generated",
+        url: "/models/power-steering-oil-pump.glb",
+        ownMaterials: true,
+        note: "3D model generated with Higgsfield (Tripo) from an AI studio image. Typical shape, not an exact copy of the CK2A part.",
+      },
+    ],
+  },
+  "power-steering-oil-line": { partsDiagramId: "power-steering-oil-line" },
   starter: {
     partsDiagramId: "starter",
     models: [
@@ -643,6 +821,7 @@ const SEEDED: Record<
     ],
   },
   "wheel-tire-cover": {
+    partsDiagramId: "wheel-tire-cover",
     models: [
       {
         label: "AI-generated",
